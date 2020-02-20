@@ -14,4 +14,29 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="add_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="string_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="letter_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="star_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
