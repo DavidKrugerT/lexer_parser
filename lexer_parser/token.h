@@ -13,7 +13,7 @@ struct token
 		STAR,
 		OR,
 		SLASH,
-		END_PROGRAM,
+		ENDPROGRAM,
 		UNKNOWN
 	};
 	id id;
@@ -26,7 +26,7 @@ token lexer(const it& first, const  it& last)
 {
 	if (first == last)
 	{
-		return { token::END_PROGRAM };
+		return { token::ENDPROGRAM };
 	}
 	token tk;
 	switch (*first)

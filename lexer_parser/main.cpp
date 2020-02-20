@@ -141,7 +141,6 @@ int main() {
 	op* add_op = add_parse(program.begin(), program.end());
 	//op* star_op = star_parse(program2.begin(), program2.end());
 	op* star_op = build_tree(program2.begin(), program2.end());
-
 	std::cout << "add_op:\n\n";
 	display(add_op);
 	std::cout << "\nstar_op:\n\n";
