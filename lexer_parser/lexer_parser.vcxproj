@@ -127,10 +127,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="add_op.h" />
-    <ClInclude Include="letter_op.h" />
+    <ClInclude Include="char_op.h" />
+    <ClInclude Include="find_op.h" />
     <ClInclude Include="op.h" />
     <ClInclude Include="star_op.h" />
-    <ClInclude Include="string_op.h" />
+    <ClInclude Include="word_op.h" />
     <ClInclude Include="token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -29,13 +29,16 @@
     <ClInclude Include="add_op.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="string_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="letter_op.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="star_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="char_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="word_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="find_op.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

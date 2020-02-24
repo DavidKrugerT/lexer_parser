@@ -1,11 +1,11 @@
 #pragma once
 
-struct String_op :op
+struct Word_op :op
 {
 	double eval() override {
 		return 0;
 	}
 	void print() override {
-		std::cout << "String\n";
+		std::cout << "Word\n";
 	}
 };

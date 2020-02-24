@@ -7,7 +7,8 @@
 struct token
 {
 	enum id {
-		LETTER,
+		CHAR,
+		WORD,
 		ANY,
 		PLUS,
 		STAR,
@@ -26,7 +27,7 @@ token lexer(const it& first, const  it& last)
 {
 	if (first == last)
 	{
-		return { token::ENDPROGRAM };
+		return { token::ENDPROGRAM};
 	}
 	token tk;
 	switch (*first)
@@ -40,7 +41,7 @@ token lexer(const it& first, const  it& last)
 	case '.':
 		tk = { token::ANY };
 	default:
-		tk = { token::LETTER };
+		tk = { token::CHAR };
 	};
 	return tk;
 }
