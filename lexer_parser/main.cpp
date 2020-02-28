@@ -4,6 +4,7 @@
 #include "Word_op.h"
 #include "char_op.h"
 #include "star_op.h"
+#include "ingore_op.h"
 
 #include <iostream>
 #include <regex>
@@ -21,8 +22,8 @@
 <CHAR>		:= a-z
 <FIND>		:= <MATCH>
 <MATCH>		:= <WORD><REPEAT>
-<REPEAT		:= <CHAR>*
-<WORD>		:= <CHAR><REPEAT> | <CHAR><>WORD>
+<REPEAT		:= <WORD>*
+<WORD>		:= <CHAR>+ | <CHAR><>WORD>
 */
 
 std::string stringprogram = "davidddd";
@@ -31,9 +32,10 @@ std::string program2 = "loo*";
 
 using it = std::string::iterator;
 
-op* star_parse(it, it, op*);
+op* star_parse(it&, it, op*);
 op* find_parse(it, it, op*);
-op* add_parse(it, it);
+//op* add_parse(it, it);
+op* build_tree(it, it);
 
 //char_parse only checks the current pointer position returns if that token is a CHAR.
 op* char_parse(it &first, it last) {
@@ -60,19 +62,15 @@ op* word_parse(it &first, it last) {
 	return string_op;
 }
 
-op* add_parse(it first, it last) {
+op* add_parse(it& first, it last, op* lhs) {
 	token lex;
 	lex.id = token::id::UNKNOWN;
-	op* lhs = word_parse(first, last);
-	if (!lhs) {
-		return nullptr;
-	}
 	lex = lexer(first, last);
 	if (lex.id != token::PLUS) {
 		return nullptr;
 	}
 	first++;
-	op* rhs = word_parse(first, last);
+	op* rhs = build_tree(first, last);
 	if (!rhs) {
 		return nullptr;
 	}
@@ -82,32 +80,33 @@ op* add_parse(it first, it last) {
 	return add;
 }
 
-
-
-op* star_parse(it first, it last, op* child) {
+op* star_parse(it &first, it last, op* child) {
 	token lex;
 	lex = lexer(first, last);
 	if (lex.id != token::STAR) {
 		return nullptr;
 	}
+	first++;
 	Star_op* star = new Star_op();
 	star->operands.push_back(child);
 	return star;
 }
-	
-op* find_parse(it first, it last) {
+
+op* slash_parse(it& first,it last, op* child) {
 	token lex;
-	lex.id = token::id::UNKNOWN;
-	op* cha = char_parse(first, last);
-	
+	lex = lexer(first, last);
+	if (lex.id == token::I)
+	{
+		I_op* I = new I_op();
+		I->operands.push_back(child);
+		return I;
+	}
+	O_op* O = new O_op();
+	O->operands.push_back(child);
+	return O;
+}
 
-
-
-
-	return nullptr;
-}	
-	
-//
+// skapar en rot med char_parse och en star_parse med den roten.
 op* build_tree(it first, it last) {
 	op* root = nullptr;
 	root = word_parse(first, last); //string är skapad och har returnats in i root = "loo" i vectorns operands
@@ -118,6 +117,16 @@ op* build_tree(it first, it last) {
 	unop = star_parse(first, last, root);
 	if (unop) {
 		root = unop;
+	}
+	unop = slash_parse(first, last, root);
+	if (unop)
+	{
+		root = unop;
+	}
+	op* binop = nullptr;
+	binop = add_parse(first, last, root);
+	if (binop) {
+		root = binop;
 	}
 	return root;
 }
@@ -141,28 +150,31 @@ void display(op* root) {
 }
 
 int main() {
+	
 
 	//string_parse build
-	auto begin = stringprogram.begin();
-	op* word_op = word_parse(begin, stringprogram.end());
+	//auto begin = stringprogram.begin();
+	//op* word_op = word_parse(begin, stringprogram.end());
 
 	////add_op build
-	op* add_op = add_parse(program.begin(), program.end());
+	//op* add_op = add_parse(begin, program.end());
 	
 	//star_op build tree
-	op* star_op = build_tree(program2.begin(), program2.end());
+	std::string program3 = "loo*\\I";
+	auto begin = program3.begin();
+	op* op = build_tree(begin, program3.end());
+	std::cout << program3;
+	//
+	//op* Find_op = find_star_parse(program2.begin(), program2.end());
 
-	op* Find_op = find_parse(program2.begin(), program2.end());
-
-	std::cout << "find_op:\n\n";
-	display(Find_op);
-
-	/*std::cout << "string_op:\n\n";
-	display(word_op);
-	std::cout << "add_op:\n\n";
-	display(add_op);
-	std::cout << "\nstar_op:\n\n";
-	display(star_op);*/
+	//std::cout << "find_op:\n\n";
+	//display(Find_op);
+	//std::cout << "string_op:\n\n";
+	//display(word_op);
+	//std::cout << "add_op:\n\n";
+	//display(add_op);
+	std::cout << "\nop:\n\n";
+	display(op);
 
 	return 0;
 }

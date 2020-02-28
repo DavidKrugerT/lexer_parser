@@ -13,9 +13,10 @@ struct token
 		PLUS,
 		STAR,
 		OR,
-		SLASH,
-		ENDPROGRAM,
-		UNKNOWN
+		END,
+		UNKNOWN,
+		I,
+		O
 	};
 	id id;
 
@@ -25,9 +26,17 @@ using it = std::string::iterator;
 
 token lexer(const it& first, const  it& last)
 {
+	if (std::string(first, first+2) == "\\I")
+	{
+		return { token::I };
+	}
+	if (std::string(first, first + 2) == "\\O")
+	{
+		return { token::O };
+	}
 	if (first == last)
 	{
-		return { token::ENDPROGRAM};
+		return { token::END};
 	}
 	token tk;
 	switch (*first)

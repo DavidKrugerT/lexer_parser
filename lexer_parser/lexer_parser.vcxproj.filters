@@ -41,5 +41,8 @@
     <ClInclude Include="find_op.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ingore_op.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
