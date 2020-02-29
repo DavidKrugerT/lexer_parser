@@ -26,10 +26,6 @@
 <WORD>		:= <CHAR>+ | <CHAR><>WORD>
 */
 
-std::string stringprogram = "davidddd";
-std::string program = "hej+da";
-std::string program2 = "loo*";
-
 using it = std::string::iterator;
 
 op* star_parse(it&, it, op*);
@@ -150,29 +146,13 @@ void display(op* root) {
 }
 
 int main() {
-	
 
-	//string_parse build
-	//auto begin = stringprogram.begin();
-	//op* word_op = word_parse(begin, stringprogram.end());
-
-	////add_op build
-	//op* add_op = add_parse(begin, program.end());
-	
 	//star_op build tree
-	std::string program3 = "loo*\\I";
-	auto begin = program3.begin();
-	op* op = build_tree(begin, program3.end());
-	std::cout << program3;
-	//
-	//op* Find_op = find_star_parse(program2.begin(), program2.end());
-
-	//std::cout << "find_op:\n\n";
-	//display(Find_op);
-	//std::cout << "string_op:\n\n";
-	//display(word_op);
-	//std::cout << "add_op:\n\n";
-	//display(add_op);
+	std::string program = "loo*\\I";
+	auto begin = program.begin();
+	op* op = build_tree(begin, program.end());
+	std::cout << program;
+	
 	std::cout << "\nop:\n\n";
 	display(op);
 
