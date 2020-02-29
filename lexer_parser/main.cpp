@@ -13,9 +13,6 @@
 #include <algorithm>
 #include <sstream>
 
-
-//hej - j ska hamna som en char i * 
-
 /*
 <ADD_OP>	:= <STRING> + <STRING>
 <STRING>	:= <CHAR>
