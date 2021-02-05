@@ -6,25 +6,24 @@
 
 struct token
 {
-	enum id {
+	enum Id {
 		CHAR,
-		WORD,
 		ANY,
-		PLUS,
+		ADD,
 		STAR,
-		OR,
 		END,
 		UNKNOWN,
 		I,
-		O
+		O,
+		COUNTER
 	};
-	id id;
-
+	Id id;
+	std::string value;
 };
 
 using it = std::string::iterator;
 
-token lexer(const it& first, const  it& last)
+token lexer(it& first, const  it& last)
 {
 	if (std::string(first, first+2) == "\\I")
 	{
@@ -38,19 +37,33 @@ token lexer(const it& first, const  it& last)
 	{
 		return { token::END};
 	}
+
 	token tk;
 	switch (*first)
 	{
 	case '+':
-		tk = { token::PLUS };
+		tk = {token::ADD };
+		first++;
 		break;
 	case '*':
-		tk = { token::STAR };
+		tk = {token::STAR };
 		break;
 	case '.':
-		tk = { token::ANY };
+		tk = {token::ANY };
+		break;
+	case '{':
+		tk = {token::COUNTER };
+		first++;
+		while (*first != '}')
+		{
+			tk.value.push_back(*first);
+			first++;
+		}
+		break;
 	default:
 		tk = { token::CHAR };
+		tk.value.push_back(*first);
+		break;
 	};
 	return tk;
 }

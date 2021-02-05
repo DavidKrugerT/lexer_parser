@@ -2,9 +2,9 @@
 #include "op.h"
 #include "add_op.h"
 #include "Word_op.h"
-#include "char_op.h"
 #include "star_op.h"
 #include "ingore_op.h"
+#include "parser.h"
 
 #include <iostream>
 #include <regex>
@@ -13,21 +13,21 @@
 #include <algorithm>
 #include <sstream>
 
-/*
-<ADD_OP>	:= <STRING> + <STRING>
-<STRING>	:= <CHAR>
-<CHAR>		:= a-z
-<FIND>		:= <MATCH>
-<MATCH>		:= <WORD><REPEAT>
-<REPEAT		:= <WORD>*
-<WORD>		:= <CHAR>+ | <CHAR><>WORD>
-*/
+// hej+da
+// hejjaaahejguada
 
 using it = std::string::iterator;
 
+int main() {
+	std::string program = "hejdaaa";
+
+	Parser parser;
+}
+/*
+
 op* star_parse(it&, it, op*);
 op* find_parse(it, it, op*);
-//op* add_parse(it, it);
+op* add_parse(it, it);
 op* build_tree(it, it);
 
 //char_parse only checks the current pointer position returns if that token is a CHAR.
@@ -145,13 +145,18 @@ void display(op* root) {
 int main() {
 
 	//star_op build tree
-	std::string program = "loo*\\I";
+	std::string program = "lo+loo";
 	auto begin = program.begin();
 	op* op = build_tree(begin, program.end());
 	std::cout << program;
-	
+
 	std::cout << "\nop:\n\n";
 	display(op);
 
 	return 0;
 }
+
+
+
+
+*/
